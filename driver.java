@@ -31,49 +31,6 @@ public class driver
 
 		pOverwinter model = new pOverwinter();
 		
-/*		model.runModel_Census_All_Vacc_EK();
-		model.runModel_Census_Sheep_Vacc_EK();
-		model.runModel_Census_Vacc_EK();
-		model.runModel_Census_Vacc_Ext_EK();
-		model.runModel_Census_Vacc_ExtAll_EK();
-		
-		model.runModel_Census_EK();
-		
-		model.runModel_Census_All_Vacc();
-		model.runModel_Census_Sheep_Vacc();
-		model.runModel_Census_Vacc();
-		model.runModel_Census_Vacc_Ext();
-		model.runModel_Census_Vacc_ExtAll();
-	*/
-		
-	//	First set	
-	/*	model.runModel_Census_Big();
-		model.runModel_Census_Vacc_Prop_G(0.25);
-*/
-	//	model.runModel_Census_EK();
-	//	model.runModel_Census_WorstCase();
-	//	model.runModel_Census_WorstCaseSecond();
-		
-	//	Second set
-	/*	model.runModel_Census_Vacc();
-		model.runModel_Census_Vacc_Prop_G(0.5);
-		model.runModel_Census_Vacc_EK();
-		model.runModel_Census_Vacc_Prop(0.5);
-	*/	
-	/*	model.runModel_Census_Vacc();
-		model.runModel_Census_All_Vacc();
-		model.runModel_Census_Vacc_Prop_G(0.5);
-*/
-/*		model.runModel_Census_Sheep_Vacc();
-		model.runModel_Census_Vacc_Prop_G(0.75);
-*/
-	 /*
-	//	Third set
-		model.runModel_Census_Sheep_Vacc();
-		model.runModel_Census_Vacc_Prop_G(0.75);
-		model.runModel_Census_Sheep_Vacc_EK();
-		model.runModel_Census_Vacc_Prop(0.75);
-		*/
 		
 	//	Fourth set
 	/*	model.runModel_Census_All_Vacc();
@@ -125,65 +82,23 @@ public class driver
 	 	model.runModel_Census_WorstCaseSecond();
 	 	*/
 	//	model.runModel_Census_Big();
-		model.runModel_Census_EK();
+	//	model.runModel_Census_EK();
 // Test
 
-//		model.runModel_Census_Big();
-//		model.runModel_Census_Vacc();
-/*		model.runModel_Census_Vacc_Prop_G();
-		model.runModel_Census_Vacc_Prop();
-*/
-//		model.runModel_Census_EK();
-//		model.runModel_Census_All_Vacc();
-/*		model.runModel_Census_Vacc_Prop_G();
-		model.runModel_Census_Vacc_Prop();
-*/
-	//	model.runModel_Census_Sheep_Vacc();
-	//	model.runModel_Census_Vacc_Prop_G();
-	//	model.runModel_Census_All_Vacc_EK();
-		
-	//	model.runModel_Census_Vacc_AC();
-	//	model.runModel_Census_Vacc_AC_EK();
-	//	model.SingleRun();
-	//	model.runModel_Census_Vacc();
-	//	model.runModel_Census_Vacc_Prop();
-
-//		model.runModel_Census_Big();
-//		model.runModel_Census_Vacc_Prop();
-//		model.runModel_Census_Vacc_Prop_G();
-//		model.runModel_Census_Vacc_EK();
-//		model.runModel_Census_Big();
-		
-//		model.runModel_Census_All_Vacc();
-		
-//		model.runModel_Census_All_Vacc();
-//		model.runModel_Census_Vacc_Ext();
-//		model.runModel_Census_Vacc_ExtAll();
-//		model.runModel_Census_EK();
-	
-	//	model.runModel_Census_Vacc_Ext();
-/*		model.runModel_Census_Vacc_EK();
-		model.runModel_Census_Vacc_ExtAll_EK();*/
-//		model.runModel_Census_Sheep_Vacc_EK();
-		
-//		model.runModel_Census_Vacc_ExtAll();
-//		model.runModel_Census_Vacc_ExtAll_EK();
-		//model.runModel_SIACS_Big();
-		
-/*		model.runModel_Census_All_Vacc_EK();
-		model.runModel_Census_Vacc_Ext_EK();
+/*		model.runModel_Census_Vacc_Prop_G(0.75);
+		model.runModel_Census_Vacc_Prop(0.25);
+		model.runModel_Census_Vacc();
 	*/
-	//	model.runModel_Census_Big();
-	//	model.runModel_Census_Vacc_Prop();
-		//		GammaDistribution test;
-//		test = new GammaDistribution();
-//		double total = 2.8;
-		/*for(int i = 0; i < 1000000; i++){
-		double sample = new GammaDistribution(20.6, 1).sample();
-		total = total + sample;
-		}
-		System.out.println(total / 1000000);
+	/*	model.runModel_Census_Vacc_EK();
+		model.runModel_Census_Vacc_Prop_G(0.25);
+		model.runModel_Census_Vacc_Prop(0.75);
 		*/
+		
+		model.runModel_Census_Sheep_Vacc();
+		model.runModel_Census_Sheep_Vacc_EK();
+		model.runModel_Census_All_Vacc();
+		model.runModel_Census_All_Vacc_EK();
+		
 		//System.out.println((int) Math.ceil(total));
 		
 		// model.runModel_Census_WorstCase();
@@ -620,9 +535,9 @@ public static void runModel_Census_EK() throws Exception {
 public static void runModel_Census_Vacc() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleVacc_2.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleVacc_2011csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/CattleVacc.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/CattleVacc.csv"));
 
@@ -681,9 +596,9 @@ public static void runModel_Census_Vacc() throws Exception {
 public static void runModel_Census_All_Vacc() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleSheepVaccG_2.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleSheepVaccG_2011.csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/CattleSheepVaccG.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/CattleSheepVaccG.csv"));
 
@@ -742,9 +657,9 @@ public static void runModel_Census_All_Vacc() throws Exception {
 public static void runModel_Census_Sheep_Vacc() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/SheepVaccG_2.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/SheepVaccG_2011.csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/SheepVaccG.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/SheepVaccG.csv"));
 
@@ -927,9 +842,9 @@ public static void runModel_Census_Vacc_ExtAll() throws Exception {
 public static void runModel_Census_Vacc_EK() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleVaccEK.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleVaccEK2011.csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/CattleVaccEK.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/CattleVaccEK.csv"));
 
@@ -990,9 +905,9 @@ public static void runModel_Census_Vacc_EK() throws Exception {
 public static void runModel_Census_All_Vacc_EK() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleSheepVaccEK.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/CattleSheepVaccEK2011.csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/CattleSheepVaccEK.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/CattleSheepVaccEK.csv"));
 
@@ -1053,9 +968,9 @@ public static void runModel_Census_All_Vacc_EK() throws Exception {
 public static void runModel_Census_Sheep_Vacc_EK() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/SheepVaccEK.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/SheepVaccEK2011.csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/SheepVaccEK.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/SheepVaccEK.csv"));
 
@@ -1242,9 +1157,11 @@ public static void runModel_Census_Vacc_ExtAll_EK() throws Exception {
 public static void runModel_Census_Vacc_Prop(double prop) throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/VaccP50EK.csv"));
+	String propN = Double.toString(prop * 100);
+	String fn = "Output/Census/Revised/NewFeed/Clinical/Vaccinate/VaccP" + propN + "EK_2011.csv";
+	BufferedWriter writer = t1.initilaiseOutputOW(new File(fn));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/VaccP25EK.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/VaccP25EK.csv"));
 
@@ -1303,9 +1220,11 @@ public static void runModel_Census_Vacc_Prop(double prop) throws Exception {
 public static void runModel_Census_Vacc_Prop_G(double prop) throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllDataVaccRev.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
-
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/Vaccinate/VaccP75G_2.csv"));
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
+	
+	String propN = Double.toString(prop * 100);
+	String fn = "Output/Census/Revised/NewFeed/Clinical/Vaccinate/VaccP" + propN + "G_2011.csv";
+	BufferedWriter writer = t1.initilaiseOutputOW(new File(fn));
 /*	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Vaccinate/Sheep/VaccP25G.csv"));
 	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Vaccinate/Cattle/VaccP25G.csv"));
 */
