@@ -120,9 +120,12 @@ public class driver
 		model.runModel_Census_All_Vacc();
 		model.runModel_Census_Vacc_Prop_G(0.5);
 */	
-		model.runModel_Census_Sheep_Vacc();
+/*		model.runModel_Census_Sheep_Vacc();
 		model.runModel_Census_Vacc_Prop_G(0.75);
-		model.runModel_Census_WorstCaseSecond();
+	 	model.runModel_Census_WorstCaseSecond();
+	 	*/
+	//	model.runModel_Census_Big();
+		model.runModel_Census_EK();
 // Test
 
 //		model.runModel_Census_Big();
@@ -309,13 +312,13 @@ class pOverwinter {
 public static void runModel_Census_Big() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllData.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
 /*	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/Revised/CensusBaseline_1000_2.csv"));
 	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/Revised/Sheep/CensusBaseline_1000_2.csv"));
 	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/Revised/Cattle/CensusBaseline_1000_2.csv"));
 */
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_2.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_1996_2011.csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Sheep/CensusBaselineG.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Cattle/CensusBaselineG.csv"));
 
@@ -333,7 +336,7 @@ public static void runModel_Census_Big() throws Exception {
 	System.out.println("BASELINE");
 	for(int h = 0; h < 4; h++){
 		for (int i = 0; i < startDays.length; i++) {
-			for (int l = 1; l <= 500; l++) {
+			for (int l = 1; l <= 1000; l++) {
 				for (int m = 0; m < tTweaks.length; m++) {
 					for (int n = 0; n < vInfTweaks.length; n++) {
 						for (int p = 0; p < eipBaseTweaks.length; p++) {
@@ -555,9 +558,9 @@ public static void runModel_SIACS_Big() throws Exception {
 public static void runModel_Census_EK() throws Exception {
 	String fi = "../../Data/AgCensus/CensusDatasets/Processed/scotAgCensus2011BTVCoords_AllData.csv";
 	readWrite t1 = new readWrite(new File(fi));
-	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean.csv";
+	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaseline_EK.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaseline_EK_1996_2011_2.csv"));
 //	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Sheep/CensusBaseline_EK.csv"));
 //	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Cattle/CensusBaseline_EK.csv"));
 
