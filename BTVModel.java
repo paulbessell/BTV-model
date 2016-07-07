@@ -93,6 +93,10 @@ public class BTVModel {
 		this.nac = 0;
 		this.nas = 0;
 	}
+	
+	public void changeBites(double newBite){
+		this.nBites = newBite;
+	}
 
 	public void changePreference(double pref) {
 		this.feedPreference = true;
