@@ -93,6 +93,10 @@ public class BTVModel {
 		this.nac = 0;
 		this.nas = 0;
 	}
+
+/*  
+ * The following methods are a bunch of methods for adjusting the parameters. Most of them are called from the driver class 	
+ */
 	
 	public void changeBites(double newBite){
 		this.nBites = newBite;
@@ -171,7 +175,6 @@ public class BTVModel {
 		for (int i = 1; i <= number; i++) {
 			this.setSeeds(curr);
 		}
-
 	}
 
 	public void setSeedsTotallyRandom(int number) {
