@@ -72,7 +72,7 @@ public class BTVModel {
 		this.vaccination = false;
 		this.vaccinated = 0;
 		this.exponential = false;
-		this.nBites = 2500;
+		this.nBites = 5000;
 		this.vectorInf = 0.19;
 		// this.vectorInf = 0.05;
 		this.spiked = false;
@@ -262,6 +262,7 @@ public class BTVModel {
 
 		int infMem = this.infectious;
 
+		// This loops through the infectious farms and updates the disease compartments 
 		for (int i = 0; i < infMem; i++) {
 			Farm currInf = (Farm) this.vInfectious.elementAt(i);
 			currInf.updateStatus(day, this.latent);
@@ -278,8 +279,11 @@ public class BTVModel {
 
 		for (int i = 0; i < this.vInfectious.size(); i++) {
 			Farm currInf = (Farm) this.vInfectious.elementAt(i);
+			
+			// This calls up the number of infectious bites on that day
 			int todaysBites = currInf.getNInfBitesA(day);
 					
+			// This method creates a sorted array of random doubles
 			double[] aThresh = this.getRanArray(todaysBites);
 			double total = 0;
 			double totMem = 0;
@@ -287,22 +291,25 @@ public class BTVModel {
 			int counter = 0;
 
 		for (int j = 0; j < todaysBites; j++) {
+			// If transmission is successful then continue
 			if (this.acq > Math.random()) {
 				double threshold = aThresh[j];
 				boolean flag = false;
-
+				
+				// Loops through the vector of susceptible farms and tests transmission 
 				while (!flag && counter < this.vSusceptibles.size()) {
 
 					Farm currFarm = (Farm) this.vSusceptibles.elementAt(counter);
 
 					double dist = Math.sqrt(Math.pow( (currInf.x - currFarm.x), 2) + Math.pow((currInf.y - currFarm.y), 2)) / 1000;
 
+					// Samples which farm will be bitten given the kernel
 					double kerVal = this.normValue(dist) * currInf.gausScaleLS;
 					if (this.exponential) kerVal = this.expValue(dist) * currInf.expScaleLS;
 
 					double cAcq = currFarm.getCattle() + currFarm.getSheep();
 					total = total + (cAcq * kerVal);
-
+					
 					if (total >= threshold) {
 						if (currFarm.getTempD(day) > 7.5) {
 							flag = true;
@@ -345,7 +352,6 @@ public class BTVModel {
 
 
 	public int[] runEpidemic(int duration) {
-		// System.out.println(this.normValue(10));
 		for (int i = this.startDay; i <= duration; i++) {
 			this.runHostToVectorTrans(i);
 			this.runVectorToHostTrans(i);

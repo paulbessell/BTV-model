@@ -88,21 +88,23 @@ public class driver
 		
 		/*model.runModel_Census_Vacc_Prop(0.5);
 		model.runModel_Census_Vacc_Prop_G(0.5);
-		model.runModel_Census_Big();
 		*/
+		model.runModel_Census_Big();
+		
 	/*	model.runModel_Census_EK();
 		model.runModel_Census_Vacc_Prop(0.75);
 		model.runModel_Census_Vacc_Prop_G(0.75);
 		model.runModel_Census_Vacc_Prop(0.25);
 		model.runModel_Census_Vacc_Prop_G(0.25);
 	*/
-		
+	/*	
 		model.runModel_Census_Vacc();
 		model.runModel_Census_Vacc_EK();
 		model.runModel_Census_Sheep_Vacc();
 		model.runModel_Census_Sheep_Vacc_EK();
 		model.runModel_Census_All_Vacc();
 		model.runModel_Census_All_Vacc_EK();
+		*/
 		
 		//model.runModel_Census_All_Vacc_EK();
 		//model.runModel_Census_Vacc_Prop_G(0.25);
@@ -252,13 +254,8 @@ public static void runModel_Census_Big() throws Exception {
 	readWrite t1 = new readWrite(new File(fi));
 	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
-/*	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/Revised/CensusBaseline_1000_2.csv"));
-	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/Revised/Sheep/CensusBaseline_1000_2.csv"));
-	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/Revised/Cattle/CensusBaseline_1000_2.csv"));
-*/
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_1996_2011_2.csv"));
-//	BufferedWriter sheepWriter = t1.initilaiseSheepList(new File("Output/Census/Revised/NewFeed/Sheep/CensusBaselineG.csv"));
-//	BufferedWriter cattleWriter = t1.initilaiseCattleList(new File("Output/Census/Revised/NewFeed/Cattle/CensusBaselineG.csv"));
+//	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_1996_2011_2.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_Test_04042017.csv"));
 
 	// Loop here
 	int[] startDays = {1, 16, 31, 46, 61, 76, 91, 106};
@@ -266,7 +263,6 @@ public static void runModel_Census_Big() throws Exception {
 	double[] vInfTweaks = {0.01, 0.02};
 	double[] eipBaseTweaks = {13.3, 12.7};
 	double[] eipRateTweaks = {0.019, 0.026};
-//	String[] seeds = {"313/0120", "543/0048", "797/0009", "483/0048"};
 	String[] seeds = {"295/0091", "543/0048", "791/0003", "483/0048"};
 	double[] etTweaks = { 0 };
 	System.out.println(new Date().toString());
@@ -296,10 +292,7 @@ public static void runModel_Census_Big() throws Exception {
 			
 								myDriver.nSeeds = 1;
 								int[] output = myDriver.runEpidemic(179);
-								t1.writeOutput(writer, new int[] { 1, h, startDays[i], 5, 1, m, n, p, q, l }, output);
-//								t1.writeCattleList(cattleWriter, myDriver.cattleInf);
-//								t1.writeSheepList(sheepWriter, myDriver.sheepInf);
-	
+								t1.writeOutput(writer, new int[] { 1, h, startDays[i], 5, 1, m, n, p, q, l }, output);	
 					}
 				}
 			}

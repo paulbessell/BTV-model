@@ -450,12 +450,25 @@ public class Farm {
 		}		
 	}
 
+	/*
+ * This method looks totally mental and a really stupid way of doing things, and that is mostly right, 
+	but there is some sense underlying it
+ * 
+ */	 
 	public void updateABites(int day, int nBites){
+		// Adjust nBites by the frequency of feeding
+		nBites = this.getBitesFreq(nBites, day);
+		
+		// This calculates the number of bites on infectious species given feeding preference
 		int nInfBites = this.runBiting(nBites);
+		
+		// Calculate the EIP given the day
 		double cEIP = this.getEIPExact(day);
 		if(cEIP < 180){
 			double cumProb = 1;
 			double biteSum = 0;
+			
+			// Assuming a constant EIP and a biting rate given the temperature on each day and for each farm creates this integer array of the number of bites on each day
 			for(int i = day; i < 180; i++){
 				double biteSumMem = biteSum;
 				double cTemp = this.getTemp(i);
@@ -501,20 +514,21 @@ public class Farm {
 		return bDist.sample();
 	}
 	
+	private int getBitesFreq(int bites, int day){
+		BinomialDistribution bDist = new BinomialDistribution(bites, this.getBiteIntervalRate(this.getTemp(day)));
+		return bDist.sample();
+	}
+	
+	
 	private int runBiting(int nBites){
 		int nInfBites = 0;
 		double totBites = ((this.getCattle() + this.getSheep()) * nBites);
-/*		System.out.println("tot bites = "+ totBites + " Cattle bites = " + this.getCattleBites(nBites));
-		System.out.println("n sheep = "+ this.getSheep() + " n Cattle = " + this.getCattle());
-*/
+
 		double sheepBites = 0;
 		if(this.getSheep() > 0) sheepBites = (totBites - this.getCattleBites(nBites)) / (this.getSheep());
 		double cattleBites = 0;
 		if(this.getCattle() > 0) cattleBites = this.getCattleBites(nBites) / (this.getCattle());
-/*		
-		System.out.println("n bites = "+nBites+" Sheep bites = "+ sheepBites + " Cattle bites = " + cattleBites);
-		System.out.println("Sheep infected = "+ this.getSheepInfected() + " Cattle infected = " + this.getCattleInfected());
-*/
+
 		nInfBites = this.getBitesInfected((int) ((sheepBites * this.getSheepInfected()) + (cattleBites * this.getCattleInfected())));
 		
 		return nInfBites;
