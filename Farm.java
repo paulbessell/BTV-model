@@ -253,6 +253,10 @@ public class Farm {
 
 	}
 
+/*
+ *  This massive method cycles through the vector of infected animals and adjusts their statuses - dead sheep are removed
+ *  
+ */
 	public void updateStatus(int day, int latent) {
 
 		for (int i = 0; i < this.infectedAnimals.size(); i++) {
@@ -260,8 +264,6 @@ public class Farm {
 		
 			if ((currA.iDay + latent) == day) {
 				this.infectiousC++;
-//				if(currA.cow) this.cattleInfected ++;
-//				if(!currA.cow) this.sheepInfected ++;
 			}
 			if(!currA.cow){
 				if((currA.iDay + latent) <= day && (currA.iDay + latent + currA.getViraemia()) > day){
@@ -321,44 +323,16 @@ public class Farm {
 		// System.out.println(this.getSheep()+", "+this.getCattle()+", "+this.livestock+", "+sheep);
 		if (sheep) {
 			newInf = ((double) (this.sheepInfected + this.sheepRecovered + this.sheepVacc) / this.getSheep()) < Math.random();
-			if (newInf) {
-				// System.out.println("HERE");
-				//this.sheepInfected++;
-				intInf = 1;
-			}
+			if (newInf) intInf = 1;			
 		}
 		if (!sheep) {
 			newInf = ((double) (this.cattleInfected + this.cattleRecovered + this.cattleVacc) / this.getCattle()) < Math.random();
-			if (newInf) {
-				//this.cattleInfected++;
-				intInf = 2;
-			}
+			if (newInf)	intInf = 2;
 		}
 		return intInf;
 	}
 
-	// Get the number of bites due that day
-	public int getNInfBites(int day){
-		
-		int nBites = 0;
-		if(this.vBites.size() > 0){
-			for(int i = 0; i < this.vBites.size(); i++){
-				bite currBite = (bite) this.vBites.elementAt(i);
-				if(currBite.getBiteDay() == day && this.getTemp(day) > 10.5){
-					nBites = nBites + currBite.getnBites();
-					this.vBites.removeElementAt(i);
-					i--;
-				}
-				else if(currBite.getBiteDay() == day && this.getTemp(day) <= 10.5){
-					this.vBites.removeElementAt(i);
-					i--;
-				}				
-				if(currBite.getBiteDay() < day) System.out.println("BITE VECTOR ERROR");
-			}
-		}		
-		return nBites;
-	}
-
+// Get the number of bites due that day
 	public int getNInfBitesA(int day){
 		
 		int nBites = 0;
@@ -368,15 +342,6 @@ public class Farm {
 					}							
 		}		
 		return nBites;
-	}
-
-	public double getTempW(int day) {
-		day = day + 60;
-		int tDay = day / 30;
-		int rDay = day % 30;
-		double temp = this.tempData[tDay];
-		if (rDay > 15 && tDay != 5) temp = (this.tempData[tDay] + this.tempData[tDay + 1]) / 2;
-		return temp + this.tempOffset;
 	}
 
 	public double getTemp(int day) {
@@ -424,31 +389,10 @@ public class Farm {
 
 	public double getBiteIntervalRate(double temp) {
 		double out = (0.0002 * temp * (temp - 3.7) * Math.pow((41.9 - temp), (1 / 2.7)));
+		if(out < 0) out = 0;
 		return out;
 	}
 
-// This is the big one where all the business takes place
-	public void updateVBites(int day, int nBites){
-		int nInfBites = this.runBiting(nBites);
-		double cEIP = this.getEIPExact(day);
-		if(cEIP < 180){
-			double cumProb = 1;
-			double biteSum = 0;
-			for(int i = day; i < 180; i++){
-				double biteSumMem = biteSum;
-				double cTemp = this.getTemp(i);
-				cumProb = cumProb * (1 - this.vectorMortality(cTemp));
-				biteSum = biteSum + this.getBiteIntervalRate(cTemp);
-				if(i > Math.floor(day + cEIP)){
-					if(Math.floor(biteSum) > biteSumMem){
-						bite aBite = new bite(i, cumProb);
-						aBite.calcNBites(nInfBites);
-						if(aBite.getnBites() > 0) this.vBites.addElement(aBite);
-					}
-				}				
-			}
-		}		
-	}
 
 	/*
  * This method looks totally mental and a really stupid way of doing things, and that is mostly right, 
@@ -484,7 +428,8 @@ public class Farm {
 			}
 		}		
 	}
-	
+
+// The next two methods duplicate each other, the first returns the number of bites on cattle and the secont the proportion of bites on cattle
 	private double getCattleBites(double nBites){
 		double cattleBites = 0;
 		
@@ -499,12 +444,8 @@ public class Farm {
 		
 		double cattleBites= 0;
 		if(this.getCattle() == 0) cattleBites = 0;
-		else if(this.getCattle() < this.getSheep()) cattleBites = (this.getCattle()) - (this.getCattle() * (1-this.prefFeed)) + (this.prefFeed * this.getCattle());
-		
-//Dropped - wrong bit of code
-		//else if(this.getCattle() >= this.getSheep()) cattleBites = (this.getCattle() * this.prefFeed) - (this.getSheep() * (1-this.prefFeed)) + (this.prefFeed * this.getSheep());
+		else if(this.getCattle() < this.getSheep()) cattleBites = (this.getCattle()) - (this.getCattle() * (1-this.prefFeed)) + (this.prefFeed * this.getCattle());		
 		else if(this.getCattle() >= this.getSheep()) cattleBites = this.getCattle() - (this.getSheep() * (1-this.prefFeed)) + (this.prefFeed * this.getSheep());
-		//	System.out.println("cattle bite prob = " + cattleBites / this.livestock);
 		
 		return cattleBites / this.livestock;
 	}
@@ -535,32 +476,7 @@ public class Farm {
 		
 	}
 
-	// Check this bit!!!
-	public double getTempC(int day) {
-		double temp = this.getTemp(day);
-		if (temp < 13.46) {
-			double temp2 = this.getTemp(day + 30);
-			if (temp2 < 12.35)
-				temp = 12.3;
-			else if (temp2 < temp)
-				temp = (temp + temp2) / 2;
-		}
-		return temp;
-	}
-
-	// Check this bit!!!
-	public double getTempCE(int day) {
-		double temp = this.getTemp(day);
-		if (temp < 13.46) {
-			double temp2 = this.getTemp(day + 30);
-			if (temp2 < 12.35)
-				temp = 12.3;
-			else if (temp2 < temp)
-				temp = (temp + temp2) / 2;
-		}
-		return temp;
-	}
-
+// This is where the adjusted temperature is evaluated based on interpolating between monthly temperatures
 	public double getTempD(int day) {
 		int tDay = day / 30;
 		double temp = this.tempData[tDay];
@@ -572,18 +488,6 @@ public class Farm {
 			temp = (this.tempData[tDay + 1] * ((rDay - 15) / 15))
 					+ (this.tempData[tDay] * ((15 - (rDay - 15)) / 15));
 		return temp;
-	}
-
-	public double getTempF(int day) {
-		// day = day + 60;
-		int tDay = day / 30;
-		double rDay = day % 30;
-		// System.out.println("RDay = " + rDay);
-		// double temp = this.tempData[tDay];
-		// if(tDay != 5)
-		double temp = this.tempData[tDay] * ((30 - rDay) / 30)
-				+ (this.tempData[tDay + 1] * (rDay / 30));
-		return temp - tempAdj;
 	}
 
 }

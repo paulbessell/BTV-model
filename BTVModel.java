@@ -72,7 +72,7 @@ public class BTVModel {
 		this.vaccination = false;
 		this.vaccinated = 0;
 		this.exponential = false;
-		this.nBites = 5000;
+		this.nBites = 2500;
 		this.vectorInf = 0.19;
 		// this.vectorInf = 0.05;
 		this.spiked = false;
@@ -246,6 +246,9 @@ public class BTVModel {
 
 	}
 
+/*
+ *  	This is a somewhat long winded way of generating an array of random numbers that is used for the spatial kernel  
+ */
 	private double[] getRanArray(int size) {
 		double[] myarray = new double[size];
 
@@ -379,15 +382,6 @@ public class BTVModel {
 		}
 		return output;
 	}
-
-
-	private double[] randomArray() {
-		double[] outArray = new double[this.farmList.length];
-		for (int i = 0; i < this.farmList.length; i++)
-			outArray[i] = Math.random();
-		return outArray;
-	}
-
 
 	public void setPreferences() {
 		for (int i = 0; i < this.vSusceptibles.size(); i++) {

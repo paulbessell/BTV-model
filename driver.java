@@ -255,12 +255,13 @@ public static void runModel_Census_Big() throws Exception {
 	String temps = "../../Data/AgCensus/CensusDatasets/Processed/censusClimateGrid_mean_1996_2011.csv";
 
 //	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_1996_2011_2.csv"));
-	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_Test_04042017.csv"));
+	BufferedWriter writer = t1.initilaiseOutputOW(new File("Output/Census/Revised/NewFeed/Clinical/CensusBaselineG_Test_04042017_InfAdj_3.csv"));
 
 	// Loop here
 	int[] startDays = {1, 16, 31, 46, 61, 76, 91, 106};
 	double[] tTweaks = {0, 1};
-	double[] vInfTweaks = {0.01, 0.02};
+	// double[] vInfTweaks = {0.01, 0.02};
+	double[] vInfTweaks = {0.01, 0.075, 0.15};
 	double[] eipBaseTweaks = {13.3, 12.7};
 	double[] eipRateTweaks = {0.019, 0.026};
 	String[] seeds = {"295/0091", "543/0048", "791/0003", "483/0048"};
